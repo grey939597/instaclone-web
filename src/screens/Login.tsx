@@ -1,8 +1,10 @@
-const Login = ({ setIsLoggedIn }: any) => {
+import { isLoggedInVar } from "../apollo";
+
+const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-      <button onClick={() => setIsLoggedIn(true)}>Login</button>
+      <button onClick={() => isLoggedInVar(true)}>Login</button>
     </div>
   );
 };
