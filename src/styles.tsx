@@ -2,21 +2,34 @@ import { createGlobalStyle, DefaultTheme } from "styled-components";
 import reset from "styled-reset";
 
 export const lightTheme: DefaultTheme = {
-  fontColor: "#2c2c2c",
-  bgColor: "#ebebeb",
+  fontColor: "rgb(38, 38, 38)",
+  bgColor: "#fafafa",
+  accent: "#0095f6",
+  borderColor: "rgb(219, 219, 219)",
 };
 
 export const darkTheme: DefaultTheme = {
-  fontColor: "#ebebeb",
-  bgColor: "#2c2c2c",
+  fontColor: "#fafafa",
+  bgColor: "rgb(38, 38, 38)",
+  accent: "#0095f6",
+  borderColor: "rgb(219, 219, 219)",
 };
 
 export const GlobalStyles = createGlobalStyle`
   ${reset}
+  input {
+      all:unset;
+    }
+    * {
+      box-sizing:border-box;
+    }
   body {
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.fontColor};
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size:14px;
+    font-family:'Open Sans', sans-serif;
+  }
+  a {
+    text-decoration: none;
   }
 `;
