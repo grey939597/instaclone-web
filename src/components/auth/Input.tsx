@@ -8,7 +8,8 @@ const Input = styled.input<IInputProps>`
   width: 100%;
   border-radius: 3px;
   padding: 7px;
-  background-color: #ddcbcb;
+  background-color: #fafafa;
+  color: black;
   border: 0.5px solid
     ${(props) => (props.hasError ? "#e74c3c" : props.theme.borderColor)};
   margin-top: 5px;

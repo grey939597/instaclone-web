@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import routes from "../routes";
 import AuthLayout from "../components/auth/Container";
 import Button from "../components/auth/Button";
-import Separator from "../components/auth/Separator";
 import Input from "../components/auth/Input";
 import FormBox from "../components/auth/FormBox";
 import BottomBox from "../components/auth/BottomBox";
@@ -14,6 +13,10 @@ import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { gql, useMutation } from "@apollo/client";
 import FormError from "../components/auth/FormError";
 import { useHistory } from "react-router-dom";
+import {
+  createAccount,
+  createAccountVariables,
+} from "../__generated__/createAccount";
 
 interface IForm {
   firstName: string;
@@ -22,13 +25,6 @@ interface IForm {
   username: string;
   password: string;
   result: any;
-}
-
-interface ICompleteProps {
-  createAccount: {
-    ok: boolean;
-    error?: string;
-  };
 }
 
 const HeaderContainer = styled.div`
@@ -77,14 +73,14 @@ const SignUp = () => {
     mode: "onChange",
   });
 
-  const onCompleted = (data: ICompleteProps) => {
+  const onCompleted = (data: createAccount) => {
     const { username, password } = getValues();
     const {
       createAccount: { ok, error },
     } = data;
     if (!ok) {
       setError("result", {
-        message: error,
+        message: error ?? undefined,
       });
       return;
     }
@@ -94,7 +90,10 @@ const SignUp = () => {
       password,
     });
   };
-  const [createAccount, { loading }] = useMutation(CREATEACCOUNT_MUTATION, {
+  const [createAccount, { loading }] = useMutation<
+    createAccount,
+    createAccountVariables
+  >(CREATEACCOUNT_MUTATION, {
     onCompleted,
   });
   const onSubmitValid: SubmitHandler<IForm> = (data) => {

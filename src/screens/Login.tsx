@@ -17,20 +17,12 @@ import FormError from "../components/auth/FormError";
 import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "../apollo";
 import { useLocation } from "react-router-dom";
-import { Location } from "history";
+import { login, loginVariables } from "../__generated__/login";
 
 interface IForm {
   username: string;
   password: string;
   result: any;
-}
-
-interface ICompleteProps {
-  login: {
-    ok: boolean;
-    error?: string;
-    token?: string;
-  };
 }
 
 interface ILocationProps {
@@ -81,13 +73,13 @@ const Login = () => {
     },
   });
 
-  const onCompleted = (data: ICompleteProps) => {
+  const onCompleted = (data: login) => {
     const {
       login: { ok, error, token },
     } = data;
     if (!ok) {
       setError("result", {
-        message: error,
+        message: error ?? undefined,
       });
       return;
     }
@@ -95,9 +87,12 @@ const Login = () => {
       logUserIn(token);
     }
   };
-  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted,
-  });
+  const [login, { loading }] = useMutation<login, loginVariables>(
+    LOGIN_MUTATION,
+    {
+      onCompleted,
+    }
+  );
   const onSubmitValid: SubmitHandler<IForm> = (data) => {
     if (loading) {
       return;
