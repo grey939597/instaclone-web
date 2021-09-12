@@ -9,7 +9,7 @@ const Input = styled.input<IInputProps>`
   border-radius: 3px;
   padding: 7px;
   background-color: #fafafa;
-  color: black;
+  color: rgb(38, 38, 38);
   border: 0.5px solid
     ${(props) => (props.hasError ? "#e74c3c" : props.theme.borderColor)};
   margin-top: 5px;

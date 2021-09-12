@@ -11,6 +11,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
 import NotFound from "./screens/NotFound";
+import Layout from "./components/Layout";
 import { darkTheme, GlobalStyles, lightTheme } from "./styles";
 import routes from "./routes";
 import { HelmetProvider } from "react-helmet-async";
@@ -26,7 +27,13 @@ function App() {
           <Router>
             <Switch>
               <Route exact path={routes.home}>
-                {isLoggedIn ? <Home /> : <Login />}
+                {isLoggedIn ? (
+                  <Layout>
+                    <Home />
+                  </Layout>
+                ) : (
+                  <Login />
+                )}
               </Route>
               <Route exact path="/home">
                 <Redirect to="/" />
