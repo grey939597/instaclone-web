@@ -18,11 +18,11 @@ export const darkTheme: DefaultTheme = {
 export const GlobalStyles = createGlobalStyle`
   ${reset}
   input {
-      all:unset;
-    }
-    * {
-      box-sizing:border-box;
-    }
+    all: unset;
+  }
+  * {
+    box-sizing: border-box;
+  }
   body {
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.fontColor};

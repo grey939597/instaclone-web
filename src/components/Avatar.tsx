@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-const SAvatar = styled.div`
-  width: 20px;
-  height: 20px;
+interface IAvatarProps {
+  lg: boolean;
+}
+
+const SAvatar = styled.div<IAvatarProps>`
+  width: ${(props) => (props.lg ? "35px" : "20px")};
+  height: ${(props) => (props.lg ? "35px" : "20px")};
   border-radius: 100%;
   background-color: #fff;
   overflow: hidden;
@@ -14,9 +18,9 @@ const Image = styled.img`
   align-items: center;
 `;
 
-const Avatar = ({ url = "" }) => {
+const Avatar = ({ url = "", lg = false }) => {
   return (
-    <SAvatar>
+    <SAvatar lg={lg}>
       {url !== "" ? (
         <Image
           style={{ width: "100%", height: "100%" }}
