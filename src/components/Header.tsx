@@ -32,6 +32,7 @@ const Column = styled.div``;
 
 const IconsContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Icon = styled.span`

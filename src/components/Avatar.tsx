@@ -5,8 +5,8 @@ interface IAvatarProps {
 }
 
 const SAvatar = styled.div<IAvatarProps>`
-  width: ${(props) => (props.lg ? "35px" : "20px")};
-  height: ${(props) => (props.lg ? "35px" : "20px")};
+  width: ${(props) => (props.lg ? "35px" : "25px")};
+  height: ${(props) => (props.lg ? "35px" : "25px")};
   border-radius: 100%;
   background-color: #fff;
   overflow: hidden;
