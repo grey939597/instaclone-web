@@ -11,7 +11,8 @@ import styled from "styled-components";
 import Avatar from "../../components/Avatar";
 import { FatText } from "../../components/shared";
 import { seeFeed_seeFeed } from "../../__generated__/seeFeed";
-import { FEED_QUERY } from "../../screens/Home";
+import Comments from "./Comments";
+// import { FEED_QUERY } from "../../screens/Home";
 
 const TOGGLE_LIKE_MUTATION = gql`
   mutation toggleLike($id: Int!) {
@@ -29,6 +30,7 @@ const PhotoContainer = styled.div`
   margin-bottom: 60px;
   max-width: 615px;
 `;
+
 const PhotoHeader = styled.div`
   padding: 15px;
   display: flex;
@@ -72,7 +74,16 @@ const Likes = styled(FatText)`
   display: block;
 `;
 
-const Photo = ({ id, user, file, isLiked, likes }: seeFeed_seeFeed) => {
+const Photo = ({
+  id,
+  user,
+  file,
+  isLiked,
+  likes,
+  caption,
+  commentNumber,
+  comments,
+}: seeFeed_seeFeed) => {
   const updateToggleLike = (cache: any, result: any) => {
     const {
       data: {
@@ -141,6 +152,12 @@ const Photo = ({ id, user, file, isLiked, likes }: seeFeed_seeFeed) => {
           </div>
         </PhotoActions>
         <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
+        <Comments
+          author={user.username}
+          caption={caption}
+          comments={comments}
+          commentNumber={commentNumber}
+        />
       </PhotoData>
     </PhotoContainer>
   );
