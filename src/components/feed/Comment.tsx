@@ -1,4 +1,4 @@
-// import sanitizeHtml from "sanitize-html";
+import sanitizeHtml from "sanitize-html";
 import styled from "styled-components";
 import { FatText } from "../shared";
 
@@ -16,21 +16,18 @@ const CommentCaption = styled.span`
 `;
 
 const Comment = ({ author, payload }: any) => {
-  // const cleaedPayload = sanitizeHtml(
-  //   payload.replace(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g, "<mark>$&</mark>"),
-  //   {
-  //     allowedTags: ["mark"],
-  //   }
-  // );
+  const cleaedPayload = sanitizeHtml(
+    payload.replace(/#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g, "<mark>$&</mark>"),
+    {
+      allowedTags: ["mark"],
+    }
+  );
   return (
     <CommentContainer>
       <FatText>{author}</FatText>
       <CommentCaption
         dangerouslySetInnerHTML={{
-          __html: payload.replace(
-            /#[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\w]+/g,
-            "<mark>$&</mark>"
-          ),
+          __html: cleaedPayload,
         }}
       ></CommentCaption>
     </CommentContainer>
