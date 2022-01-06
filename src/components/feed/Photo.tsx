@@ -91,30 +91,46 @@ const Photo = ({
       },
     } = result;
     if (ok) {
-      const fragmentId = `Photo:${id}`;
-      const fragment = gql`
-        fragment XXName on Photo {
-          isLiked
-          likes
-        }
-      `;
-      const result = cache.readFragment({
-        id: fragmentId,
-        fragment,
-      });
-      if ("isLiked" in result && "likes" in result) {
-        const { isLiked: cacheIsLiked, likes: cacheLikes } = result;
-        cache.writeFragment({
-          id: fragmentId,
-          // cache 에서 수정하려는 부분
-          fragment,
-          // 수정 입력 값
-          data: {
-            isLiked: !cacheIsLiked,
-            likes: cacheIsLiked ? cacheLikes - 1 : cacheLikes + 1,
+      const photoId = `Photo:${id}`;
+      cache.modify({
+        id: photoId,
+        fields: {
+          isLiked(prev: boolean) {
+            return !prev;
           },
-        });
-      }
+          likes(prev: number, { readField }: any) {
+            const isLiked = readField("isLiked");
+            if (isLiked) {
+              return prev - 1;
+            }
+            return prev + 1;
+          },
+        },
+      });
+      // const fragmentId = `Photo:${id}`;
+      // const fragment = gql`
+      //   fragment XXName on Photo {
+      //     isLiked
+      //     likes
+      //   }
+      // `;
+      // const result = cache.readFragment({
+      //   id: fragmentId,
+      //   fragment,
+      // });
+      // if ("isLiked" in result && "likes" in result) {
+      //   const { isLiked: cacheIsLiked, likes: cacheLikes } = result;
+      //   cache.writeFragment({
+      //     id: fragmentId,
+      //     // cache 에서 수정하려는 부분
+      //     fragment,
+      //     // 수정 입력 값
+      //     data: {
+      //       isLiked: !cacheIsLiked,
+      //       likes: cacheIsLiked ? cacheLikes - 1 : cacheLikes + 1,
+      //     },
+      //   });
+      // }
     }
   };
   const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
