@@ -109,7 +109,7 @@ const Photo = ({
       });
       // const fragmentId = `Photo:${id}`;
       // const fragment = gql`
-      //   fragment XXName on Photo {
+      //   fragment PhotoFragment on Photo {
       //     isLiked
       //     likes
       //   }
@@ -169,6 +169,7 @@ const Photo = ({
         </PhotoActions>
         <Likes>{likes === 1 ? "1 like" : `${likes} likes`}</Likes>
         <Comments
+          photoId={id}
           author={user.username}
           caption={caption}
           comments={comments}
