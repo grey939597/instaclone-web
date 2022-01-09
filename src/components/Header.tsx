@@ -65,7 +65,11 @@ function Header() {
               <Icon>
                 <FontAwesomeIcon icon={faCompass} size="lg" />
               </Icon>
-              <Avatar url={data?.me?.avatar || ""} />
+              <Icon>
+                <Link to={`/users/${data?.me?.username}`}>
+                  <Avatar url={data?.me?.avatar || ""} />
+                </Link>
+              </Icon>
             </IconsContainer>
           ) : (
             <Link to={routes.home}>
