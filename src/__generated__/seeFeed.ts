@@ -22,10 +22,10 @@ export interface seeFeed_seeFeed_comments_user {
 export interface seeFeed_seeFeed_comments {
   __typename: "Comment";
   id: number;
-  user: seeFeed_seeFeed_comments_user;
-  payload: string;
-  isMine: boolean;
   createdAt: string;
+  isMine: boolean;
+  payload: string;
+  user: seeFeed_seeFeed_comments_user;
 }
 
 export interface seeFeed_seeFeed {

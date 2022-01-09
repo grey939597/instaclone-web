@@ -4,11 +4,14 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: XXName
+// GraphQL fragment: PhotoFragment
 // ====================================================
 
-export interface XXName {
+export interface PhotoFragment {
   __typename: "Photo";
-  isLiked: boolean;
+  id: number;
+  file: string;
   likes: number;
+  commentNumber: number;
+  isLiked: boolean;
 }

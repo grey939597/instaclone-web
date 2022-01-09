@@ -5,6 +5,7 @@ import { seeFeed_seeFeed_comments } from "../../__generated__/seeFeed";
 import { createCommentVariables } from "../../__generated__/createComment";
 import Comment from "./Comment";
 import useUser from "../../hooks/useUser";
+import { COMMENT_FRAGMENT } from "../../fragments";
 
 const CREATE_COMMENT_MUTATION = gql`
   mutation createComment($photoId: Int!, $payload: String!) {
@@ -67,18 +68,7 @@ const Comments = ({
       };
       const newCacheComment = cache.writeFragment({
         data: newComment,
-        fragment: gql`
-          fragment CommentFragment on Comment {
-            id
-            createdAt
-            isMine
-            payload
-            user {
-              username
-              avatar
-            }
-          }
-        `,
+        fragment: COMMENT_FRAGMENT,
       });
       cache.modify({
         id: `Photo:${photoId}`,
