@@ -45,6 +45,7 @@ const Comments = ({
 }: ICommentsProps) => {
   const { data: userData } = useUser();
   const { register, handleSubmit, setValue, getValues } = useForm();
+
   const createCommentUpdate = (cache: any, result: any) => {
     const { payload } = getValues();
     setValue("payload", "");
@@ -92,12 +93,14 @@ const Comments = ({
       });
     }
   };
+
   const [createCommentMutation, { loading }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
       update: createCommentUpdate,
     }
   );
+
   const onValid: SubmitHandler<createCommentVariables> = (data) => {
     if (loading) {
       return;
@@ -110,6 +113,7 @@ const Comments = ({
       },
     });
   };
+
   return (
     <CommentsContainer>
       <Comment author={author} payload={caption} />
@@ -121,8 +125,11 @@ const Comments = ({
         comments.map((comment: any) => (
           <Comment
             key={comment.id}
+            id={comment.id}
             author={comment.user.username}
             payload={comment.payload}
+            isMine={comment.isMine}
+            photoId={photoId}
           />
         ))}
       <div>
