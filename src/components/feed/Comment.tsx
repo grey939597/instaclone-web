@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -14,7 +16,11 @@ const DELETE_COMMENT_MUTATION = gql`
   }
 `;
 
-const CommentContainer = styled.div``;
+const CommentContainer = styled.div`
+  margin-bottom: 8px;
+  display: flex;
+`;
+
 const CommentCaption = styled.span`
   margin-left: 10px;
   a {
@@ -25,6 +31,13 @@ const CommentCaption = styled.span`
       text-decoration: underline;
     }
   }
+`;
+
+const DeleteBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
 `;
 
 interface ICommnetProps {
@@ -82,7 +95,11 @@ const Comment = ({ id, author, payload, isMine, photoId }: ICommnetProps) => {
           )
         )}
       </CommentCaption>
-      {isMine ? <button onClick={onDeleteClick}>X</button> : null}
+      {isMine ? (
+        <DeleteBtn onClick={onDeleteClick}>
+          <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
+        </DeleteBtn>
+      ) : null}
     </CommentContainer>
   );
 };
