@@ -16,3 +16,10 @@ route에 묶여 있는 react component
 ## Authentication
 
 styled components, themes, apollo, reactive variables, queries, mutations, react hook form, ...
+
+## Web
+
+- hooks (react hook form, useQuery, uesMutation)
+- styled component
+- apollo cache
+- reactive variables
